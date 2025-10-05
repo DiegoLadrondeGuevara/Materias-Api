@@ -1,15 +1,5 @@
 version: "3.9"
 services:
-  mongo:
-    image: mongo:6
-    container_name: mongo_materias
-    restart: always
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_DATABASE: materiasdb
-    volumes:
-      - ./data/mongo:/data/db
   app:
     build: .
     container_name: materias_service
@@ -21,3 +11,4 @@ services:
     environment:
       - PORT=3001
       - MONGODB_URI=mongodb://mongo:27017/materiasdb
+
