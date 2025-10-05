@@ -11,3 +11,31 @@ services:
 
 volumes:
   mongo_data:
+
+
+---
+levantalo con:
+docker-compose up -d
+Conéctate al contenedor:
+docker exec -it mongo-materias bash
+
+Edita /etc/mongod.conf y cambia esto:
+
+# antes
+bindIp: 127.0.0.1
+# después
+bindIp: 0.0.0.0
+
+Sal y reinicia el contenedor:
+docker restart mongo-materias
+
+
+🔗 Paso 3: Configurar tu API para conectarse a esa base remota
+
+Supongamos que la IP privada o pública de la MV de Mongo es 10.0.0.5.
+
+Edita el archivo .env de tus APIs en las otras dos MVs:
+
+el .env
+PORT=3001
+MONGODB_URI=mongodb://10.0.0.5:27017/materiasdb
